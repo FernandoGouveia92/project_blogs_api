@@ -4,31 +4,30 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('blog_posts', {
       id: {
-        type: Sequelize.INTERGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
       title: {
-        type: Sequelize.VARCAHR,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       content: {
-        type: Sequelize.VARCHAR,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       published: {
-        type: Sequelize.DATETIME,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       updated: {
-        type: Sequelize.DATETIME,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       user_id: {
-        type: Sequelize.INTERGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         field: 'user_id',
