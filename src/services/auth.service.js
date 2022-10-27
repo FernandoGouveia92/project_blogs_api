@@ -1,14 +1,10 @@
-const Joi = require('joi');
 const jwtUtil = require('../utils/jwt.util');
+const { loginSchema } = require('../schemas/validations.schemas');
 
 const { User } = require('../models');
 
 const validateBody = (params) => {
-  const schema = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-  });
-  const { error, value } = schema.validate(params);
+  const { error, value } = loginSchema.validate(params);
 
   if (error) throw error;
 
@@ -21,6 +17,10 @@ const validateLogin = async ({ email, password }) => {
   if (!user || user.password !== password) {
     const e = new Error('Invalid fields');
     e.name = 'Erro não autorizado';
+    throw e;
+  }
+  if (!user.email) {
+    const e = new Error('Some required fields are missing');
     throw e;
   }
 
