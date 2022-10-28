@@ -4,7 +4,7 @@ const authService = require('../services/auth.service');
 const newUser = async (req, res) => {
   const { type, message } = await userService.addUser(req.body);
   if (type) {
-    return res.status(type).json({ message });
+    return res.status(400).json({ message });
   }
   const { email, password } = message;
   const token = await authService.validateLogin({ email, password });

@@ -2,6 +2,7 @@
 const express = require('express');
 const authRouter = require('./auth.router');
 const userRouter = require('./user.router');
+const categoryRouter = require('./category.router');
 
 const routers = express.Router();
 routers.use('/login', authRouter);
@@ -10,6 +11,6 @@ routers.use('/login', authRouter);
 // este middleware faz validações de login do usuário, bloqueando acesso caso as informações estejam incorretas/ usuário não exista/ token seja inválido
 
 routers.use('/user', userRouter);
-// routers.use('/user', userRouter);
+routers.use('/categories', categoryRouter);
 
 module.exports = routers;
