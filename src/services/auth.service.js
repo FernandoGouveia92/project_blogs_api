@@ -3,27 +3,26 @@ const { loginSchema } = require('../schemas/validations.schemas');
 
 const { User } = require('../models');
 
-const validateBody = (params) => {
-  const { error, value } = loginSchema.validate(params);
-
-  if (error) throw error;
-
-  return value;
+const validateBody = (dataReceived) => {
+  const { error, value } = loginSchema.validate(dataReceived);
+  if (error) {
+    return ({ type: 400, message: 'Some required fields are missing' });
+  }
+  return { 
+    type: null,
+    message: value,
+  };
 };
 
 const validateLogin = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
 
   if (!user || user.password !== password) {
-    const e = new Error('Invalid fields');
-    e.name = 'Erro não autorizado';
-    throw e;
+    return {
+      type: 400,
+      message: 'Invalid fields',
+    };
   }
-  if (!user.email) {
-    const e = new Error('Some required fields are missing');
-    throw e;
-  }
-
   const { password: _, ...userWithoutPassword } = user.dataValues;
 
   const token = jwtUtil.createToken(userWithoutPassword);
