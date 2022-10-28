@@ -30,17 +30,7 @@ const validateLogin = async ({ email, password }) => {
   return token;
 };
 
-const validateToken = (token) => {
-  if (!token) {
-    const e = new Error({ status: 401, message: 'Token é obrigatório' });
-    throw e;
-  }
-  const userToken = jwtUtil.decodeToken(token);
-  return userToken;
-};
-
 module.exports = {
   validateBody,
   validateLogin,
-  validateToken,
 };

@@ -29,7 +29,19 @@ const getUser = async () => {
   return ({ type: null, message: allUsers });
 };
 
+const getById = async (id) => {
+  const johnDoe = await User.findOne({ 
+    where: { id },
+    attributes: { exclude: ['password'] },
+  });
+  if (!johnDoe) {
+    return ({ type: 400, message: 'User does not exist' });
+  }
+  return ({ type: null, message: johnDoe });
+};
+
 module.exports = {
   addUser,
   getUser,
+  getById,
 };
