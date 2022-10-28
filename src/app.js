@@ -1,4 +1,5 @@
 const express = require('express');
+// const { validateToken } = require('./middlewares/auth.middleware');
 require('express-async-errors');
 const errorMiddleware = require('./middlewares/error');
 const routes = require('./routers/router');

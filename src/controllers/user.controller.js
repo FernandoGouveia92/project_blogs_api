@@ -3,7 +3,6 @@ const authService = require('../services/auth.service');
 
 const newUser = async (req, res) => {
   const { type, message } = await userService.addUser(req.body);
-  console.log({ type, message });
   if (type) {
     return res.status(type).json({ message });
   }
@@ -12,4 +11,12 @@ const newUser = async (req, res) => {
   return res.status(201).json({ token });
 };
 
-module.exports = { newUser };
+const getUsers = async (_req, res) => {
+  const { type, message } = await userService.getUser();
+  if (type) {
+    return res.status(401).json({ message });
+  }
+  return res.status(200).json(message);
+};
+
+module.exports = { newUser, getUsers };

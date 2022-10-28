@@ -2,14 +2,14 @@
 const express = require('express');
 const authRouter = require('./auth.router');
 const userRouter = require('./user.router');
-// const authMiddleware = require('../middlewares/auth.middleware');
 
 const routers = express.Router();
 routers.use('/login', authRouter);
 // Abaixo da ação de fazer o login, que será feita validação de se o usuário existe ou não, para então acessar os endpoints dos posts do blog
-// routers.use(authMiddleware.validateToken);
+// routers.use(authMiddleware.validateToken); -> teste quebra com esse método de middleware
 // este middleware faz validações de login do usuário, bloqueando acesso caso as informações estejam incorretas/ usuário não exista/ token seja inválido
 
 routers.use('/user', userRouter);
+// routers.use('/user', userRouter);
 
 module.exports = routers;

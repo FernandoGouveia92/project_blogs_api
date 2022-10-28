@@ -19,6 +19,17 @@ const addUser = async (dataReceived) => {
   return ({ type: null, message: newUser.dataValues });
 };
 
+const getUser = async () => {
+  const allUsers = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  if (!allUsers) {
+    return ({ type: 400, message: 'Could not find all users' });
+  }
+  return ({ type: null, message: allUsers });
+};
+
 module.exports = {
   addUser,
+  getUser,
 };
