@@ -2,19 +2,25 @@ const { categorySchema } = require('../schemas/validations.schemas');
 const { Category } = require('../models');
 
 const newCatServ = async (name) => {
-  console.log(`EU sou o argumento da função do service: ${name}`);
-  const { error, value } = categorySchema.validate(name);
+  const { error } = categorySchema.validate(name);
   if (error) {
     return ({ type: 400, message: '"name" is required' });
   }
-  console.log(value);
-  // const { name } = value;
-  // console.log(name);
   const newCategory = await Category.create(name);
-  console.log(newCategory);
   return ({ type: null, message: newCategory.dataValues });
+};
+
+const getCategoryServ = async () => {
+  const allCategories = await Category.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  if (!allCategories) {
+    return ({ type: 400, message: 'Could not find all categories' });
+  }
+  return ({ type: null, message: allCategories });
 };
 
 module.exports = {
   newCatServ,
+  getCategoryServ,
 };
