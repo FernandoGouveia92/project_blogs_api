@@ -1,5 +1,9 @@
-// const express = require('express');
-// const postController = require('')
-// const authMiddleware = require('../middlewares/auth.middleware');
+const express = require('express');
+const postController = require('../controllers/post.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
 
-// const router = express.Router();
+const router = express.Router();
+
+router.get('/', authMiddleware.validateToken, postController.findAllPosts);
+
+module.exports = router;

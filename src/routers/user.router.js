@@ -3,7 +3,7 @@ const userController = require('../controllers/user.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 // const authService = require('../services/auth.service');
 
-const express = require('express');
+const router = express.Router();
 
 router.post('/', authMiddleware.emailCheck, userController.newUser);
 router.get('/', authMiddleware.validateToken, userController.getUsers);
