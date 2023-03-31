@@ -1,9 +1,5 @@
 const postService = require('../services/post.service');
 
-// const newPost = async (req, res) => {
-  
-// }
-
 const findAllPosts = async (req, res) => {
   const { type, message } = await postService.getAllPostsServ();
   if (type) {
