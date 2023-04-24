@@ -36,4 +36,4 @@ NodeJS, Express, Javascript
 
 #### BREVE DESCRIÇÃO
 
-Neste projeto, foram aplicados conhecimentos sobre NodeJS, Express, Arquitetura Software e Javacript
+Neste projeto, foram aplicados conhecimentos sobre NodeJS, Express, Arquitetura Software e Javacript para criação de uma API REST
